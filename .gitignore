@@ -2,3 +2,4 @@
 yarn.lock
 
 .vscode/*
+node_modules
