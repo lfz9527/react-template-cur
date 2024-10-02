@@ -1,0 +1,15 @@
+# 根配置
+root = true
+
+# 所有文件的默认设置
+[*]
+indent_style = space        # 使用空格进行缩进
+indent_size = 2             # 缩进大小为2个空格
+charset = utf-8             # 字符集为UTF-8
+trim_trailing_whitespace = true  # 删除行尾空白字符
+insert_final_newline = true      # 文件末尾插入一个空行
+end_of_line = lf            # 使用LF作为行尾字符
+
+# Markdown文件的特殊设置
+[*.md]
+trim_trailing_whitespace = false  # 不删除行尾空白字符（保留Markdown语法）
