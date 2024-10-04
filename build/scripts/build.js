@@ -22,7 +22,7 @@ const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024
 
 // 检测文件是否存在
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
-  console.log(222);
+    console.log(222)
     process.exit(1)
 }
 
