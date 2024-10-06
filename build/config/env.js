@@ -60,7 +60,7 @@ const REACT_APP = /^REACT_APP_/i
  * @param {string} publicUrl - 公共URL
  * @returns {Object} 包含原始和字符串化的环境变量
  */
-function getClientEnvironment(publicUrl) {
+const getClientEnvironment = (publicUrl) => {
     // 获取所有以REACT_APP_开头的环境变量
     const raw = Object.keys(process.env)
         .filter((key) => REACT_APP.test(key))
@@ -91,6 +91,11 @@ function getClientEnvironment(publicUrl) {
     }
 }
 
+const isProduction = ({NODE_ENV}) => NODE_ENV === 'production'
+const isDevelopment = ({NODE_ENV}) => JSON.parse(NODE_ENV) === 'development'
+
 module.exports = {
-    getClientEnvironment
+    getClientEnvironment,
+    isProduction,
+    isDevelopment
 }
