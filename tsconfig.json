@@ -5,7 +5,8 @@
         "target": "esnext", // 指定 ECMAScript 目标版本: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'（"ESNext"表示最新的ES语法，包括还处在stage X阶段）
         "noEmit": true, // 不输出, 不编译代码，只执行类型检查, 不生成输出文件
         "allowJs": true, // 允许编译 JavaScript 文件
-        "jsx": "react", // 指定 jsx 代码的生成: 'preserve', 'react-native', or 'react'
+        // 配置了 "jsx": "react-jsx"，这意味着你正在使用 React 17 或更高版本的 JSX 转换。在这种情况下，你不需要在每个文件中显式导入 React，因为新的 JSX 转换允许你省略这一部分。
+        "jsx": "react-jsx", // 指定 jsx 代码的生成: 'preserve', 'react-native', or 'react'
         "isolatedModules": true, // 将每个文件做为单独的模块 （与 'ts.transpileModule' 类似）
         "noImplicitAny": false, // 是否在表达式和申明上有隐含的any类型时报错
         "lib": [
