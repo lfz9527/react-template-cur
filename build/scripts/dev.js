@@ -9,8 +9,11 @@ const {
     checkRequiredFiles
 } = require('../utils')
 
+// 外部统一通过 cross-env 控制环境变量
+const realENV = process.env.NODE_ENV
+
 // 初始化开发环境
-initEnv('development')
+initEnv(realENV)
 
 // 导入所需模块
 const Webpack = require('webpack')

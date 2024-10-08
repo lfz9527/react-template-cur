@@ -48,9 +48,8 @@ const prodConfig = {
                 extractComments: false, // 删除注释
                 terserOptions: {
                     compress: {
-                        pure_funcs: isProd
-                            ? ['console.log', 'console.warn']
-                            : []
+                        // 生产环境才清除 打印的日志
+                        pure_funcs: [...(isProd ? ['console.log'] : [])]
                     }
                 }
             }),

@@ -6,7 +6,9 @@ const {
     checkRequiredFiles
 } = require('../utils')
 
-initEnv('production')
+// 外部统一通过 cross-env 控制环境变量
+const realENV = process.env.NODE_ENV
+initEnv(realENV)
 
 const chalk = require('chalk')
 const fs = require('fs-extra')
@@ -152,6 +154,7 @@ const initBuild = () => {
             } else {
                 logger.success('编译成功!\n')
             }
+            logger.info(`当前打包环境为：${process.env.NODE_ENV}\n`)
             console.log('gzip 压缩后的文件大小:\n')
             printFileSizesAfterBuild(
                 stats,

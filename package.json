@@ -3,10 +3,20 @@
     "version": "1.0.0",
     "main": "index.js",
     "license": "MIT",
+    "keywords": [
+        "React",
+        "JSX",
+        "TSX",
+        "Webpack",
+        "React Router",
+        "ESLint",
+        "template"
+    ],
     "scripts": {
         "start": "npm run dev",
-        "build": "node build/scripts/build.js",
-        "dev": "node build/scripts/dev.js",
+        "build": "cross-env NODE_ENV=production node build/scripts/build.js",
+        "build:measure": "cross-env NODE_ENV=measure node build/scripts/build.js",
+        "dev": "cross-env NODE_ENV=development node build/scripts/dev.js",
         "clean": "rimraf package-lock.json && rimraf yarn.lock && rimraf node_modules && yarn install"
     },
     "devDependencies": {
@@ -29,6 +39,7 @@
         "compression-webpack-plugin": "^11.1.0",
         "copy-webpack-plugin": "^12.0.2",
         "core-js": "^3.38.1",
+        "cross-env": "^7.0.3",
         "css-loader": "^7.1.2",
         "css-minimizer-webpack-plugin": "^7.0.0",
         "detect-port-alt": "^1.1.6",
