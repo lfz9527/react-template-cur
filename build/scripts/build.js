@@ -1,4 +1,10 @@
-const {initEnv, printBuildError, checkBrowser, logger} = require('../utils')
+const {
+    initEnv,
+    printBuildError,
+    checkBrowser,
+    logger,
+    checkRequiredFiles
+} = require('../utils')
 
 initEnv('production')
 
@@ -6,8 +12,7 @@ const chalk = require('chalk')
 const fs = require('fs-extra')
 const bfj = require('bfj')
 const webpack = require('webpack')
-const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles')
-const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages')
+const formatWebpackMessages = require('../utils/formatWebpackMessages')
 const webpackConfig = require('../webpack/webpack.prod')
 const paths = require('../config/paths')
 

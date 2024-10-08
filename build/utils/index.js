@@ -1,7 +1,11 @@
 const chalk = require('chalk')
 const ip = require('ip') // 获取 IP 地址实用程序
 const paths = require('../config/paths')
+const path = require('path')
+const fs = require('fs')
 const os = require('os')
+const detect = require('detect-port-alt') // 端口检测
+const isRoot = () => process.getuid && process.getuid() === 0
 
 // 检查当前环境是否支持交互式输出
 // process.stdout.isTTY 用于判断是否在终端环境中运行
@@ -48,6 +52,7 @@ const logger = {
     请注意，开发构建版本未经优化。
     要创建生产构建版本，请运行 npm run build。
     ${chalk.magenta(`按下 ${chalk.italic('Ctrl+c')} 停止`)}`)
+        console.log()
     },
     info: (info) => {
         console.log(chalk.cyan(info))
@@ -77,6 +82,7 @@ const checkBrowser = () => {
     }
 }
 
+// 打印构建错误
 const printBuildError = (err) => {
     const message = err != null && err.message
     const stack = err != null && err.stack
@@ -110,10 +116,48 @@ const printBuildError = (err) => {
     console.log()
 }
 
+// 清除控制台
 const clearConsole = () => {
     process.stdout.write(
         process.platform === 'win32' ? '\x1B[2J\x1B[0f' : '\x1B[2J\x1B[3J\x1B[H'
     )
+}
+
+// 端口检测
+async function choosePort(port, host) {
+    const newPort = await detect(port, host)
+    if (newPort === port) {
+        return newPort
+    }
+    const message =
+        process.platform !== 'win32' && port < 1024 && !isRoot()
+            ? `运行服务器在 1024 以下的端口需要管理员权限。`
+            : `该端口已经被占用 ${port}.`
+    if (process.stdout.isTTY) {
+        logger.warn(message)
+        return newPort
+    }
+    logger.error(message)
+    return null
+}
+
+// 检查文件是否存在
+const checkRequiredFiles = (files) => {
+    var currentFilePath
+    try {
+        files.forEach((filePath) => {
+            currentFilePath = filePath
+            fs.accessSync(filePath, fs.F_OK)
+        })
+        return true
+    } catch (err) {
+        var dirName = path.dirname(currentFilePath)
+        var fileName = path.basename(currentFilePath)
+        console.log(chalk.red('找不到必要的文件。'))
+        console.log(chalk.red('  名字: ') + chalk.cyan(fileName))
+        console.log(chalk.red('  查询地址: ') + chalk.cyan(dirName))
+        return false
+    }
 }
 
 module.exports = {
@@ -122,5 +166,7 @@ module.exports = {
     isInteractive,
     printBuildError,
     checkBrowser,
-    clearConsole
+    clearConsole,
+    choosePort,
+    checkRequiredFiles
 }

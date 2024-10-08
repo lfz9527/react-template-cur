@@ -11,7 +11,7 @@ const ANALYZER_HOST = 'localhost'
 const ANALYZER_PORT = '8888'
 // 是否开启代码分析
 const ANALYZER = false
-
+// 代理配置
 const PROXY = {
     '/Api': {
         target: 'https://www.bestflows.io/', // 联调地址

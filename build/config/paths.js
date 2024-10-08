@@ -1,6 +1,6 @@
 const path = require('path')
 const fs = require('fs')
-const getPublicUrlOrPath = require('react-dev-utils/getPublicUrlOrPath')
+const getPublicUrlOrPath = require('../utils/getPublicUrlOrPath')
 
 // 获取由 node 执行的文件的工作目录
 const appDirectory = fs.realpathSync(process.cwd())
@@ -10,16 +10,6 @@ const appDirectory = fs.realpathSync(process.cwd())
  * @param {string} relativePath 相对路径
  */
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath)
-
-// 获取公共URL或路径
-// 参数1: 是否为开发环境
-// 参数2: package.json中的homepage字段
-// 参数3: 环境变量中的PUBLIC_URL
-const publicUrlOrPath = getPublicUrlOrPath(
-    process.env.NODE_ENV === 'development',
-    require(resolveApp('package.json')).homepage,
-    process.env.PUBLIC_URL
-)
 
 /**
  * 解析模块文件
@@ -38,6 +28,9 @@ const resolveModule = (resolveFn, filePath) => {
 
 // 模块文件扩展名
 const moduleFileExtensions = ['.ts', '.tsx', '.js', '.jsx', '.json']
+
+// 获取公共URL或路径
+const publicUrlOrPath = getPublicUrlOrPath()
 
 module.exports = {
     appBuild: resolveApp('dist'), // 打包构建目录

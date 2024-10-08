@@ -1,5 +1,13 @@
 // 导入初始化环境函数
-const {initEnv, logger, isInteractive, clearConsole} = require('../utils')
+const {
+    initEnv,
+    logger,
+    isInteractive,
+    clearConsole,
+    choosePort,
+    checkBrowser,
+    checkRequiredFiles
+} = require('../utils')
 
 // 初始化开发环境
 initEnv('development')
@@ -8,11 +16,6 @@ initEnv('development')
 const Webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
 const chalk = require('chalk')
-const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles')
-const {checkBrowsers} = require('react-dev-utils/browsersHelper')
-const {choosePort} = require('react-dev-utils/WebpackDevServerUtils')
-
-// console.log('----',process.env);
 
 // 导入路径配置
 const paths = require('../config/paths')
@@ -38,7 +41,7 @@ logger.info(`正在尝试绑定到HOST环境变量: ${chalk.yellow(chalk.bold(HO
 
 // 初始化浏览器
 const initBrowsers = async () => {
-    await checkBrowsers(paths.appPath, isInteractive)
+    await checkBrowser()
     // 我们尝试使用默认端口，但如果它被占用，我们会提供给用户在不同端口上运行的选项。
     // `choosePort()` Promise 会解析到下一个可用的端口。
     const port = await choosePort(HOST, DEFAULT_PROT)
