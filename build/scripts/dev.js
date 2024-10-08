@@ -1,5 +1,5 @@
 // 导入初始化环境函数
-const {initEnv, logger, isInteractive} = require('../utils')
+const {initEnv, logger, isInteractive, clearConsole} = require('../utils')
 
 // 初始化开发环境
 initEnv('development')
@@ -7,8 +7,7 @@ initEnv('development')
 // 导入所需模块
 const Webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
-const chalk = require('react-dev-utils/chalk')
-const clearConsole = require('react-dev-utils/clearConsole')
+const chalk = require('chalk')
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles')
 const {checkBrowsers} = require('react-dev-utils/browsersHelper')
 const {choosePort} = require('react-dev-utils/WebpackDevServerUtils')

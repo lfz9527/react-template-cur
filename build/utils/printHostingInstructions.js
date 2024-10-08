@@ -1,4 +1,4 @@
-const chalk = require('react-dev-utils/chalk')
+const chalk = require('chalk')
 const url = require('url')
 const globalModules = require('global-modules')
 const fs = require('fs')

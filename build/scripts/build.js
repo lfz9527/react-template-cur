@@ -2,7 +2,7 @@ const {initEnv, printBuildError, checkBrowser, logger} = require('../utils')
 
 initEnv('production')
 
-const chalk = require('react-dev-utils/chalk')
+const chalk = require('chalk')
 const fs = require('fs-extra')
 const bfj = require('bfj')
 const webpack = require('webpack')

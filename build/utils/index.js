@@ -1,4 +1,4 @@
-const chalk = require('react-dev-utils/chalk')
+const chalk = require('chalk')
 const ip = require('ip') // 获取 IP 地址实用程序
 const paths = require('../config/paths')
 const os = require('os')
@@ -110,10 +110,17 @@ const printBuildError = (err) => {
     console.log()
 }
 
+const clearConsole = () => {
+    process.stdout.write(
+        process.platform === 'win32' ? '\x1B[2J\x1B[0f' : '\x1B[2J\x1B[3J\x1B[H'
+    )
+}
+
 module.exports = {
     initEnv,
     logger,
     isInteractive,
     printBuildError,
-    checkBrowser
+    checkBrowser,
+    clearConsole
 }
