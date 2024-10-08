@@ -15,7 +15,6 @@ const fs = require('fs-extra')
 const bfj = require('bfj')
 const webpack = require('webpack')
 const formatWebpackMessages = require('../utils/formatWebpackMessages')
-const webpackConfig = require('../webpack/webpack.prod')
 const paths = require('../config/paths')
 
 const {
@@ -35,12 +34,16 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 
 // 从命令行参数中获取除了 node 执行命令和脚本文件名之外的参数
 const argv = process.argv.slice(2)
-// 检查命令行参数中是否包含 --stats 标志
+// 检查命令行参数中是否包含 --stats 标志，含有的话就将构建信息写入json文件
 const writeStatsJson = argv.indexOf('--stats') !== -1
+
+// 是否开启代码分析
+const isAnalyze = argv.indexOf('--analyze')!== -1
 
 // 创建生产构建并打印部署说明。
 const build = (previousFileSizes) => {
     console.log('创建优化的生产构建...')
+    const webpackConfig = require('../webpack/webpack.prod')
     const compiler = webpack(webpackConfig)
     return new Promise((resolve, reject) => {
         compiler.run((err, stats) => {
@@ -125,6 +128,10 @@ const initBrowsers = async () => {
         )
         // 清空构建目录
         fs.emptyDirSync(paths.appBuild)
+
+        if(isAnalyze){
+            process.env.REACT_APP_ANALYZE = 'true'
+        }
         return build(previousFileSizes)
     } catch (err) {
         if (err && err.message) {

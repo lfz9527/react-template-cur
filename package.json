@@ -17,7 +17,9 @@
         "build": "cross-env NODE_ENV=production node build/scripts/build.js",
         "build:measure": "cross-env NODE_ENV=measure node build/scripts/build.js",
         "dev": "cross-env NODE_ENV=development node build/scripts/dev.js",
-        "clear": "rimraf package-lock.json && rimraf yarn.lock && rimraf node_modules && yarn install"
+        "clear": "rimraf package-lock.json && rimraf yarn.lock && rimraf node_modules && yarn install",
+        "stats": "cross-env NODE_ENV=production node build/scripts/build.js --stats",
+        "analyze": "cross-env NODE_ENV=production node build/scripts/build.js --analyze"
     },
     "devDependencies": {
         "@babel/cli": "^7.25.6",
