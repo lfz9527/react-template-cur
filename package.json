@@ -19,7 +19,25 @@
         "dev": "cross-env NODE_ENV=development node build/scripts/dev.js",
         "clear": "rimraf package-lock.json && rimraf yarn.lock && rimraf node_modules && yarn install",
         "stats": "cross-env NODE_ENV=production node build/scripts/build.js --stats",
-        "analyze": "cross-env NODE_ENV=production node build/scripts/build.js --analyze"
+        "analyze": "cross-env NODE_ENV=production node build/scripts/build.js --analyze",
+        "prepare": "husky install"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged",
+            "commit-msg": "commitlint --config .commitlintrc.js -E HUSKY_GIT_PARAMS"
+        }
+    },
+    "lint-staged": {
+        "*.{ts,tsx,js}": [
+            "eslint --config .eslintrc.js"
+        ],
+        "*.{css,less,scss}": [
+            "stylelint --config .stylelintrc.js"
+        ],
+        "*.{ts,tsx,js,json,html,yml,css,less,scss,md}": [
+            "prettier --write"
+        ]
     },
     "devDependencies": {
         "@babel/cli": "^7.25.6",
@@ -29,6 +47,8 @@
         "@babel/preset-react": "^7.24.7",
         "@babel/preset-typescript": "^7.25.7",
         "@babel/runtime-corejs3": "^7.25.7",
+        "@commitlint/cli": "^19.5.0",
+        "@commitlint/config-conventional": "^19.5.0",
         "@eslint/js": "^9.11.1",
         "@types/react": "^18.3.11",
         "@types/react-dom": "^18.3.0",
@@ -55,8 +75,10 @@
         "globals": "^15.10.0",
         "gzip-size": "6",
         "html-webpack-plugin": "^5.6.0",
+        "husky": "^9.1.6",
         "less": "^4.2.0",
         "less-loader": "^12.2.0",
+        "lint-staged": "^15.2.10",
         "mini-css-extract-plugin": "^2.9.1",
         "postcss": "^8.4.47",
         "postcss-flexbugs-fixes": "^5.0.2",
