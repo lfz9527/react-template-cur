@@ -8,13 +8,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 抽离css文�
 const paths = require('../config/paths')
 const {getClientEnvironment, isDevelopment} = require('../config/env')
 const useTypeScript = fs.existsSync(paths.appTsConfig)
-const {raw,stringified} = getClientEnvironment(paths.publicUrlOrPath)
+const {raw} = getClientEnvironment(paths.publicUrlOrPath)
 const {
     REACT_APP_IMAGE_BASE_64_PATH,
     REACT_APP_SHOULD_BASE_64_FROM_FILE_END,
     REACT_APP_ASSET_SIZE_LIMIT
-} = stringified
-const isDev = isDevelopment(stringified)
+} = raw
+const isDev = isDevelopment(raw)
 
 const cssLoaders = (importLoaders) => [
     // 执行顺序从后到前 less-loader -> postcss-loader -> css-loader -> style-loader/MiniCssExtractPlugin.loader
@@ -160,7 +160,7 @@ const config = {
         new HtmlWebpackPlugin({
             template: paths.appHtml,
             cache: true,
-            env: stringified.NODE_ENV || ''
+            env: raw.NODE_ENV || 'development'
         }),
         new CopyPlugin({
             patterns: [
