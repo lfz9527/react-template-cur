@@ -1,7 +1,7 @@
 // host
 const SERVER_HOST = 'localhost'
 // 端口号
-const SERVER_PORT = 9000
+const SERVER_PORT = 8100
 
 // 代码分析报告 host
 const ANALYZER_HOST = 'localhost'

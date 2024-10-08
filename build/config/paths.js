@@ -66,7 +66,7 @@ module.exports = {
     // 获取tsconfig.json 文件目录
     appTsConfig: resolveApp('tsconfig.json'),
     devConfig: resolveApp('devConfig'),
-    appSvg: resolveApp('src/assets/icons/index.js'),
+    appSvg: resolveApp('src/assets/icons'),
     // 支持的模块文件扩展名数组
     moduleFileExtensions
 }

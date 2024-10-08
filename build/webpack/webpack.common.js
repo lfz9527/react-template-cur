@@ -5,7 +5,6 @@ const CopyPlugin = require('copy-webpack-plugin') // 将已存在的单个文件
 const WebpackBar = require('webpackbar') // 优雅的 Webpack 进度条和分析器
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin') // 启动本地服务/打包错误提示
 const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 抽离css文件, 这个插件将CSS取到单独的文件中。它为每个包含CSS的JS文件创建一个CSS文件。它支持按需加载 CSS 和 SourceMaps。
-
 const paths = require('../config/paths')
 const {getClientEnvironment, isDevelopment} = require('../config/env')
 const useTypeScript = fs.existsSync(paths.appTsConfig)
@@ -16,6 +15,8 @@ const {
     REACT_APP_ASSET_SIZE_LIMIT
 } = stringified['process.env']
 const isDev = isDevelopment(stringified['process.env'])
+
+console.log('useTypeScript', useTypeScript)
 
 const cssLoaders = (importLoaders) => [
     // 执行顺序从后到前 less-loader -> postcss-loader -> css-loader -> style-loader/MiniCssExtractPlugin.loader
@@ -142,11 +143,15 @@ const config = {
                     },
                     {
                         test: /\.svg$/,
-                        loader: 'svg-sprite-loader',
                         include: paths.appSvg,
-                        options: {
-                            symbolId: 'icon-[name]' // symbolId和use使用的名称对应 <use xlinkHref={"#icon-" + svgName} />
-                        }
+                        use: [
+                            {
+                                loader: 'svg-sprite-loader',
+                                options: {
+                                    symbolId: 'icon-[name]' // symbolId和use使用的名称对应 <use xlinkHref={"#icon-" + svgName} />
+                                }
+                            }
+                        ]
                     }
                 ]
             }
