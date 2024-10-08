@@ -29,6 +29,9 @@ module.exports = {
                 extensions: ['.tsx', '.ts', '.js', '.json']
             },
             typescript: {}
+        },
+        react: {
+            version: 'detect' // 自动检测当前 React 版本
         }
     },
     // ESLint 支持使用第三方插件。在使用插件之前，你必须使用 npm 安装它。
@@ -50,6 +53,8 @@ module.exports = {
         'react-hooks/exhaustive-deps': WARN, // 检查 Effect 的依赖
         '@typescript-eslint/ban-ts-comment': WARN,
         '@typescript-eslint/no-explicit-any': OFF,
-        eqeqeq: WARN
+        eqeqeq: WARN,
+        // 在 tsconfig 配置了 jsx:react-jsx 时，需要关闭此规则
+        'react/react-in-jsx-scope': OFF // 关闭此规则
     }
 }
