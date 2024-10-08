@@ -3,11 +3,14 @@ const WARN = 1 // "warn" 或 1 - 开启规则，使用警告级别的错误：wa
 const ERROR = 2 // "error" 或 2 - 开启规则，使用错误级别的错误：error (当被触发的时候，程序会退出)
 
 module.exports = {
+    ignores: ['**/node_modules/**', '**/dist/**'],
     // 提供运行环境，一个环境定义了一组预定义的全局变量
-    env: {
-        browser: true,
-        es2021: true,
-        node: true
+    languageOptions: {
+        globals: {
+            browser: true,
+            es2021: true,
+            node: true
+        }
     },
     // 配置文件可以被基础配置中的已启用的规则继承。
     extends: [
