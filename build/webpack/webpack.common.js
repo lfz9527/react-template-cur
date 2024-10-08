@@ -16,8 +16,6 @@ const {
 } = stringified['process.env']
 const isDev = isDevelopment(stringified['process.env'])
 
-console.log('useTypeScript', useTypeScript)
-
 const cssLoaders = (importLoaders) => [
     // 执行顺序从后到前 less-loader -> postcss-loader -> css-loader -> style-loader/MiniCssExtractPlugin.loader
     isDev ? 'style-loader' : MiniCssExtractPlugin.loader, // style-loader的作用就是将结果以style标签的方式插入DOM树中。style-loader将css-loader打包好的 CSS 代码以<style>标签的形式插入到 HTML 文件中

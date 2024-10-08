@@ -1,5 +1,7 @@
 const chalk = require('react-dev-utils/chalk')
 const ip = require('ip') // 获取 IP 地址实用程序
+const paths = require('../config/paths')
+const os = require('os')
 
 // 检查当前环境是否支持交互式输出
 // process.stdout.isTTY 用于判断是否在终端环境中运行
@@ -54,6 +56,26 @@ const logger = {
         console.log(chalk.yellow(warn))
     }
 }
+// 检查浏览器
+const checkBrowser = () => {
+    const pak = require(paths.appPackageJson)
+    const browserslist = pak.browserslist
+
+    if (browserslist != null) {
+        return Promise.resolve(browserslist)
+    }
+    if (!isInteractive) {
+        return Promise.reject(
+            new Error(
+                chalk.red('这里要求必须添加 browsers.') +
+                    os.EOL +
+                    `请添加 ${chalk.underline(
+                        'browserslist'
+                    )} 在文件 ${chalk.bold('package.json')}里面。`
+            )
+        )
+    }
+}
 
 const printBuildError = (err) => {
     const message = err != null && err.message
@@ -92,5 +114,6 @@ module.exports = {
     initEnv,
     logger,
     isInteractive,
-    printBuildError
+    printBuildError,
+    checkBrowser
 }

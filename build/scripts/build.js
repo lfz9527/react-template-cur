@@ -1,4 +1,4 @@
-const {initEnv, isInteractive, printBuildError} = require('./utils')
+const {initEnv, printBuildError, checkBrowser, logger} = require('../utils')
 
 initEnv('production')
 
@@ -7,14 +7,15 @@ const fs = require('fs-extra')
 const bfj = require('bfj')
 const webpack = require('webpack')
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles')
-const {checkBrowsers} = require('react-dev-utils/browsersHelper')
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages')
-const FileSizeReporter = require('react-dev-utils/FileSizeReporter')
 const webpackConfig = require('../webpack/webpack.prod')
 const paths = require('../config/paths')
-const {logger} = require('./utils')
-const measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild
-const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild
+
+const {
+    measureFileSizesBeforeBuild,
+    printFileSizesAfterBuild
+} = require('../utils/FileSizeReporter')
+const printHostingInstructions = require('../utils/printHostingInstructions')
 
 // 会警告超过这些尺寸的文件
 const WARN_AFTER_BUNDLE_GZIP_SIZE = 512 * 1024
@@ -22,7 +23,6 @@ const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024
 
 // 检测文件是否存在
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
-    console.log(222)
     process.exit(1)
 }
 
@@ -43,7 +43,7 @@ const build = (previousFileSizes) => {
                     return reject(err)
                 }
                 let errMessage = err.message
-                // 为 postcss 错误添加额外信息。
+                //  处理 postcss 错误
                 if (Object.prototype.hasOwnProperty.call(err, 'postcssNode')) {
                     errMessage +=
                         '\n编译错误: 从 CSS selector 开始' +
@@ -92,6 +92,7 @@ const build = (previousFileSizes) => {
                 previousFileSizes,
                 warnings: messages.warnings
             }
+            // 构建打印信息是否需要写入json文件
             if (writeStatsJson) {
                 return bfj
                     .write(
@@ -101,6 +102,7 @@ const build = (previousFileSizes) => {
                     .then(() => resolve(resolveArgs))
                     .catch((error) => reject(new Error(error)))
             }
+            return resolve(resolveArgs)
         })
     })
 }
@@ -108,9 +110,9 @@ const build = (previousFileSizes) => {
 // 初始化浏览器
 const initBrowsers = async () => {
     try {
-        await checkBrowsers(paths.appPath, isInteractive)
-        //首先，读取构建目录中的当前文件大小。
-        //这让我们展示了他们后来发生了多大的变化。
+        // 校验浏览器
+        await checkBrowser()
+        // 检测构建前的文件大小
         const previousFileSizes = await measureFileSizesBeforeBuild(
             paths.appBuild
         )
@@ -154,6 +156,7 @@ const initBuild = () => {
                 WARN_AFTER_CHUNK_GZIP_SIZE
             )
             console.log()
+            printHostingInstructions()
         },
         (err) => {
             const tscCompileOnError =

@@ -91,7 +91,7 @@ const getClientEnvironment = (publicUrl) => {
     }
 }
 
-const isProduction = ({NODE_ENV}) => NODE_ENV === 'production'
+const isProduction = ({NODE_ENV}) => JSON.parse(NODE_ENV) === 'production'
 const isDevelopment = ({NODE_ENV}) => JSON.parse(NODE_ENV) === 'development'
 
 module.exports = {

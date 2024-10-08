@@ -1,5 +1,5 @@
 // 导入初始化环境函数
-const {initEnv, logger, isInteractive} = require('./utils')
+const {initEnv, logger, isInteractive} = require('../utils')
 
 // 初始化开发环境
 initEnv('development')

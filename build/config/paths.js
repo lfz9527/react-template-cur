@@ -65,8 +65,12 @@ module.exports = {
     publicUrlOrPath,
     // 获取tsconfig.json 文件目录
     appTsConfig: resolveApp('tsconfig.json'),
+    // 开发配置
     devConfig: resolveApp('devConfig'),
+    // svg存放地址
     appSvg: resolveApp('src/assets/icons'),
+    // yarn.lock 文件目录
+    yarnLockFile: resolveApp('yarn.lock'),
     // 支持的模块文件扩展名数组
     moduleFileExtensions
 }
