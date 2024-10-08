@@ -5,7 +5,7 @@ const App = () => {
     return (
         <>
             <SvgIcon svgName={'close'} color='red' />
-            <div>Hello World123444422</div>
+            <div>Hello World123</div>
         </>
     )
 }
