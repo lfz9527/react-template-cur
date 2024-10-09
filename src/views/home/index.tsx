@@ -1,5 +1,5 @@
 import React from 'react'
 const Index = () => {
-    return <div>Home</div>
+    return <div>Mobile Home</div>
 }
 export default Index

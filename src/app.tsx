@@ -1,5 +1,6 @@
 import React from 'react'
 import {useRoutes} from 'react-router-dom'
+import './app.less'
 import routes from './core/router'
 
 const App = () => {
