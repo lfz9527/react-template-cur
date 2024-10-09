@@ -8,7 +8,7 @@ import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
  * @param {React.ReactNode} props.children - 将被 QueryClientProvider 包裹的子组件。
  * @returns {JSX.Element} - 渲染的 QueryClientProvider 组件。
  */
-export function TanStackQueryProvider({children}: {children: React.ReactNode}) {
+function TanStackQueryProvider({children}: {children: React.ReactNode}) {
     const queryClient = new QueryClient({
         defaultOptions: {
             queries: {
@@ -25,3 +25,5 @@ export function TanStackQueryProvider({children}: {children: React.ReactNode}) {
         </QueryClientProvider>
     )
 }
+
+export default TanStackQueryProvider
