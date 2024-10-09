@@ -54,8 +54,6 @@ module.exports = {
         '@typescript-eslint/ban-ts-comment': WARN,
         '@typescript-eslint/no-explicit-any': OFF,
         eqeqeq: WARN,
-        // 在 tsconfig 配置了 jsx:react-jsx 时，需要关闭此规则
-        'react/react-in-jsx-scope': OFF, // 关闭此规则
         'no-unused-vars': WARN
     }
 }
