@@ -20,7 +20,6 @@
         "clear": "rimraf package-lock.json && rimraf yarn.lock && rimraf node_modules && yarn install",
         "stats": "cross-env NODE_ENV=production node build/scripts/build.js --stats",
         "analyze": "cross-env NODE_ENV=production node build/scripts/build.js --analyze",
-        "prepare": "husky install",
         "lint": "npm run lint-eslint && npm run lint-stylelint",
         "lint-eslint": "eslint -c .eslintrc.js --ext .ts,.tsx,.js src --fix",
         "lint-stylelint": "stylelint --config .stylelintrc.js src/**/*.{less,css,scss} --fix"
