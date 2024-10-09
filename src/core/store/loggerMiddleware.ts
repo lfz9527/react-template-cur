@@ -36,6 +36,7 @@ const loggerImpl: LoggerImpl = (f, name) => (set, get, store) => {
     // 创建一个新的 set 函数，用于记录日志
     const loggedSet: typeof set = (...args) => {
         // 调用原始的 set 函数来更新状态
+        // @ts-ignore
         set(...args)
         // 记录日志，包括可选的名称和当前状态
         console.log(...(name ? [`${name}:`] : []), get())
