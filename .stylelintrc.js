@@ -40,6 +40,7 @@ module.exports = {
         'node_modules/**/*',
         'build/**/*',
         'dist/**/*',
-        'src/assets/font/*'
+        'src/assets/font/*',
+        'src/styles/reset.less'
     ]
 }
