@@ -1,6 +1,6 @@
 import React from 'react'
 import {useRoutes} from 'react-router-dom'
-import routes from './router'
+import routes from './core/router'
 
 const App = () => {
     // 通过useRoutes配置实现路由管理
