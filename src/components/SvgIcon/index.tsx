@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React from 'react'
 import './index.less'
 
 interface SvgIconProps {
@@ -7,7 +7,7 @@ interface SvgIconProps {
     color?: string // 填充颜色
 }
 
-const SvgIcon: FC<SvgIconProps> = (props) => {
+const SvgIcon: React.FC<SvgIconProps> = (props) => {
     const {svgName, color = '', svgClass = ''} = props
     return (
         <i aria-hidden='true'>
