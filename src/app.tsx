@@ -1,12 +1,11 @@
-import SvgIcon from './components/SvgIcon/index'
+import React from 'react'
+import {useRoutes} from 'react-router-dom'
+import routes from './router'
 
 const App = () => {
-    return (
-        <>
-            <SvgIcon svgName={'close'} color='red' />
-            <div>Hello World123</div>
-        </>
-    )
+    // 通过useRoutes配置实现路由管理
+    const element = useRoutes(routes)
+    return <div className='app'>{element}</div>
 }
 
 export default App
