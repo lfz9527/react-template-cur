@@ -75,6 +75,7 @@ const build = (previousFileSizes) => {
                 }
                 return reject(new Error(messages.errors.join('\n\n')))
             }
+            console.log('messages',messages);
             // 如果是在CI环境中运行
             if (
                 process.env.CI &&
