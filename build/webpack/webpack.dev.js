@@ -11,7 +11,8 @@ const devConfig = {
     output: {
         path: paths.appBuild,
         publicPath: paths.publicUrlOrPath,
-        filename: 'js/[name].js'
+        filename: 'js/bundle.js',
+        chunkFilename: 'js/[name].chunk.js'
     },
     devServer: {
         host: SERVER_HOST,

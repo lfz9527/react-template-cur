@@ -75,7 +75,6 @@ const build = (previousFileSizes) => {
                 }
                 return reject(new Error(messages.errors.join('\n\n')))
             }
-            console.log('messages',messages);
             // 如果是在CI环境中运行
             if (
                 process.env.CI &&
@@ -86,7 +85,11 @@ const build = (previousFileSizes) => {
                 // 在 CI 构建中忽略源映射警告。更多信息请参见 #8227
                 const filteredWarnings = messages.warnings.filter(
                     (w) => !/Failed to parse source map/.test(w)
+                ).filter(
+                    // 忽略 entrypoint size limit 警告
+                    (w) =>!/entrypoint size limit/.test(w)
                 )
+
                 if (filteredWarnings.length) {
                     console.log(
                         chalk.yellow(

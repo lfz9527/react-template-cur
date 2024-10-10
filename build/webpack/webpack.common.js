@@ -51,9 +51,7 @@ const cssLoaders = (importLoaders) => [
 ]
 
 const config = {
-    entry: {
-        app: paths.appIndexJs
-    },
+    entry: paths.appIndexJs,
     cache: {
         // 缓存,cache.type 设置为 'filesystem' 是会开放更多的可配置项。
         // 收集在反序列化期间分配的未使用的内存，, 仅当 cache.type 设置为 'filesystem' 时生效。这需要将数据复制到更小的缓冲区中，并有性能成本。
