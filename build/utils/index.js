@@ -124,14 +124,22 @@ const clearConsole = () => {
 }
 
 // 端口检测
+
+/**
+ * 选择一个可用的端口号
+ * 如果指定的端口号可用，则返回该端口号；否则，返回一个新的可用端口号
+ * @param {number} port - 要检查的端口号
+ * @param {string} host - 主机名或 IP 地址
+ * @returns {Promise<number|null>} - 解析为选定或检测到的端口号的 Promise，如果无法选择端口，则返回 null
+ */
 async function choosePort(port, host) {
     const newPort = await detect(port, host)
     if (newPort === port) {
         return newPort
     }
     const message =
-        process.platform !== 'win32' && port < 1024 && !isRoot()
-            ? `运行服务器在 1024 以下的端口需要管理员权限。`
+        process.platform!== 'win32' && port < 1024 &&!isRoot()
+           ? `运行服务器在 1024 以下的端口需要管理员权限。`
             : `该端口已经被占用 ${port}.`
     if (process.stdout.isTTY) {
         logger.warn(message)
@@ -140,7 +148,6 @@ async function choosePort(port, host) {
     logger.error(message)
     return null
 }
-
 // 检查文件是否存在
 const checkRequiredFiles = (files) => {
     var currentFilePath

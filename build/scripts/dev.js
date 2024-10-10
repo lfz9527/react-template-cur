@@ -47,7 +47,7 @@ const initBrowsers = async () => {
     await checkBrowser()
     // 我们尝试使用默认端口，但如果它被占用，我们会提供给用户在不同端口上运行的选项。
     // `choosePort()` Promise 会解析到下一个可用的端口。
-    const port = await choosePort(HOST, DEFAULT_PROT)
+    const port = await choosePort(DEFAULT_PROT,HOST)
     if (port == null) {
         // 没有找到端口
         return
