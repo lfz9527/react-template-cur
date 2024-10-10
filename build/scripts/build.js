@@ -86,9 +86,11 @@ const build = (previousFileSizes) => {
                 const filteredWarnings = messages.warnings.filter(
                     (w) => !/Failed to parse source map/.test(w)
                 ).filter(
-                    // 忽略 entrypoint size limit 警告
+                    // 忽略 入口文件限制的 警告
                     (w) =>!/entrypoint size limit/.test(w)
                 )
+
+                console.log('filteredWarnings',filteredWarnings);
 
                 if (filteredWarnings.length) {
                     console.log(
