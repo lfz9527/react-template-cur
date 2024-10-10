@@ -89,9 +89,6 @@ const build = (previousFileSizes) => {
                     // 忽略 入口文件限制的 警告
                     (w) =>!/entrypoint size limit/.test(w)
                 )
-
-                console.log('filteredWarnings',filteredWarnings);
-
                 if (filteredWarnings.length) {
                     console.log(
                         chalk.yellow(
