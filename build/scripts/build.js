@@ -85,6 +85,9 @@ const build = (previousFileSizes) => {
                 // 在 CI 构建中忽略源映射警告。更多信息请参见 #8227
                 const filteredWarnings = messages.warnings.filter(
                     (w) => !/Failed to parse source map/.test(w)
+                ).filter(
+                    // 在CI 构建中忽略 入口文件大小限制
+                    w => !/entrypoint size limit/.test(w)
                 )
                 if (filteredWarnings.length) {
                     console.log(
