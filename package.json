@@ -1,7 +1,6 @@
 {
     "name": "react-template",
     "version": "1.0.0",
-    "main": "index.js",
     "license": "MIT",
     "keywords": [
         "React",
@@ -86,7 +85,6 @@
         "postcss": "^8.4.47",
         "postcss-flexbugs-fixes": "^5.0.2",
         "postcss-loader": "7.3.0",
-        "postcss-mobile-forever": "3.4.2",
         "postcss-preset-env": "^10.0.6",
         "prettier": "^3.3.3",
         "recursive-readdir": "^2.2.3",

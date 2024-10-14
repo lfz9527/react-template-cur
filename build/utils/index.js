@@ -123,8 +123,6 @@ const clearConsole = () => {
     )
 }
 
-// 端口检测
-
 /**
  * 选择一个可用的端口号
  * 如果指定的端口号可用，则返回该端口号；否则，返回一个新的可用端口号
@@ -138,8 +136,8 @@ async function choosePort(port, host) {
         return newPort
     }
     const message =
-        process.platform!== 'win32' && port < 1024 &&!isRoot()
-           ? `运行服务器在 1024 以下的端口需要管理员权限。`
+        process.platform !== 'win32' && port < 1024 && !isRoot()
+            ? `运行服务器在 1024 以下的端口需要管理员权限。`
             : `该端口已经被占用 ${port}.`
     if (process.stdout.isTTY) {
         logger.warn(message)
