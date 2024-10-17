@@ -20,15 +20,15 @@ const prodConfig = {
     target: 'browserslist',
     output: {
         path: paths.appBuild,
-        filename: 'js/[name].[contenthash:8].js',
-        assetModuleFilename: 'images/[name].[contenthash:8].[ext]',
+        filename: '[name].[contenthash:8].js',
+        assetModuleFilename: '[name].[contenthash:8].[ext]',
         publicPath: paths.publicUrlOrPath,
         clean: true // 在生成文件之前清空 output 目录
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'css/[name].[contenthash:8].css',
-            chunkFilename: 'css/[name].[contenthash:8].chunk.css',
+            filename: '[name].[contenthash:8].css',
+            chunkFilename: '[name].[contenthash:8].chunk.css',
             ignoreOrder: true
         }),
         new CompressionPlugin({

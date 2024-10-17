@@ -2,6 +2,7 @@
     "name": "react-template",
     "version": "1.0.0",
     "license": "MIT",
+    "main": "src/index/index.tsx",
     "keywords": [
         "React",
         "JSX",
@@ -61,6 +62,7 @@
         "antd-mobile": "^5.37.1",
         "autoprefixer": "^10.4.20",
         "babel-loader": "^9.2.1",
+        "babel-plugin-import": "^1.13.8",
         "bfj": "^9.0.2",
         "chalk": "4.0.0",
         "compression-webpack-plugin": "^11.1.0",
@@ -116,7 +118,6 @@
         "axios": "^1.7.7",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
-        "react-router-dom": "^6.26.2",
         "zustand": "^5.0.0-rc.2"
     },
     "engines": {

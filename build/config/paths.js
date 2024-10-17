@@ -17,13 +17,14 @@ const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath)
  * @param {string} filePath 文件路径
  */
 const resolveModule = (resolveFn, filePath) => {
+    const resFn = resolveFn ? resolveFn : (p) => p
     const extension = moduleFileExtensions.find((extension) =>
-        fs.existsSync(resolveFn(`${filePath}${extension}`))
+        fs.existsSync(resFn(`${filePath}${extension}`))
     )
     if (extension) {
-        return resolveFn(`${filePath}${extension}`)
+        return resFn(`${filePath}${extension}`)
     }
-    return resolveFn(`${filePath}.tsx`)
+    return resFn(`${filePath}.tsx`)
 }
 
 // 模块文件扩展名
@@ -40,8 +41,10 @@ module.exports = {
     appPath: resolveApp('.'),
     // public文件路径
     appPublic: resolveApp('public'),
-    // 项目入口文件路径
+    // 单页面项目入口文件路径
     appIndexJs: resolveModule(resolveApp, 'src/index'),
+    // 多页面项目入口文件路径
+    mulAppIndexJs: resolveApp('src/pages'),
     // 代理配置文件路径
     appProxySetup: resolveModule(resolveApp, 'setProxy'),
     // HTML 模板文件路径
@@ -65,5 +68,6 @@ module.exports = {
     // yarn.lock 文件目录
     yarnLockFile: resolveApp('yarn.lock'),
     // 支持的模块文件扩展名数组
-    moduleFileExtensions
+    moduleFileExtensions,
+    resolveModule
 }

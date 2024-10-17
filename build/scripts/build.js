@@ -28,7 +28,7 @@ const WARN_AFTER_BUNDLE_GZIP_SIZE = 512 * 1024
 const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024
 
 // 检测文件是否存在
-if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
+if (!checkRequiredFiles([paths.appHtml])) {
     process.exit(1)
 }
 
@@ -38,7 +38,7 @@ const argv = process.argv.slice(2)
 const writeStatsJson = argv.indexOf('--stats') !== -1
 
 // 是否开启代码分析
-const isAnalyze = argv.indexOf('--analyze')!== -1
+const isAnalyze = argv.indexOf('--analyze') !== -1
 
 // 创建生产构建并打印部署说明。
 const build = (previousFileSizes) => {
@@ -83,12 +83,12 @@ const build = (previousFileSizes) => {
                 messages.warnings.length
             ) {
                 // 在 CI 构建中忽略源映射警告。更多信息请参见 #8227
-                const filteredWarnings = messages.warnings.filter(
-                    (w) => !/Failed to parse source map/.test(w)
-                ).filter(
-                    // 在CI 构建中忽略 入口文件大小限制
-                    w => !/entrypoint size limit/.test(w)
-                )
+                const filteredWarnings = messages.warnings
+                    .filter((w) => !/Failed to parse source map/.test(w))
+                    .filter(
+                        // 在CI 构建中忽略 入口文件大小限制
+                        (w) => !/entrypoint size limit/.test(w)
+                    )
                 if (filteredWarnings.length) {
                     console.log(
                         chalk.yellow(
@@ -132,7 +132,7 @@ const initBrowsers = async () => {
         // 清空构建目录
         fs.emptyDirSync(paths.appBuild)
 
-        if(isAnalyze){
+        if (isAnalyze) {
             process.env.REACT_APP_ANALYZE = 'true'
         }
         return build(previousFileSizes)

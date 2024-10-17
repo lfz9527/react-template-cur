@@ -84,8 +84,8 @@ const checkBrowser = () => {
 
 // 打印构建错误
 const printBuildError = (err) => {
-    const message = err != null && err.message
-    const stack = err != null && err.stack
+    const message = err !== null && err.message
+    const stack = err !== null && err.stack
     //为Terser错误添加更多有用消息
     if (
         stack &&
@@ -165,7 +165,11 @@ const checkRequiredFiles = (files) => {
     }
 }
 
+// 校验目录是否存在
+const checkDir = (directories) => !!directories && fs.existsSync(directories)
+
 module.exports = {
+    checkDir,
     initEnv,
     logger,
     isInteractive,

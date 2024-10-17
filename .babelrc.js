@@ -39,6 +39,15 @@ module.exports = {
                 regenerator: true,
                 useESModules: false
             }
+        ],
+        // 按需加载组件
+        [
+            'import',
+            {
+                libraryName: 'antd-mobile',
+                libraryDirectory: 'es/components',
+                style: false
+            }
         ]
     ]
 }

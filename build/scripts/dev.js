@@ -29,7 +29,7 @@ const {SERVER_HOST, SERVER_PORT} = require(paths.devConfig)
 const webpackDevConfig = require('../webpack/webpack.dev')
 
 // 检查必需文件是否存在
-if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
+if (!checkRequiredFiles([paths.appHtml])) {
     // 如果必需文件不存在，退出进程
     process.exit(1)
 }
