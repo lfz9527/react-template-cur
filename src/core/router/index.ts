@@ -1,6 +1,8 @@
 import {RouteObject} from 'react-router-dom'
-import routeModels from './model'
+import CommonModel from './common-model'
+import PageModel from './page-model'
 
-const routes: RouteObject[] = [...routeModels]
+const routes: RouteObject[] = [...CommonModel,...PageModel]
+
 
 export default routes

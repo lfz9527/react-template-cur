@@ -11,7 +11,7 @@ module.exports = {
             mobileUnit: 'vw', // 指定需要转换成的视窗单位，默认vw
             selectorBlackList: [], // 指定不转换为视窗单位的类名，
             valueBlackList: ['1px solid'], // 指定不用转换的值
-            exclude: [/node_modules/] // 设置忽略文件，用正则做目录名匹配
+            // exclude: [/node_modules/] // 设置忽略文件，用正则做目录名匹配
         }
     }
 }

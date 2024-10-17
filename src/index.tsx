@@ -4,6 +4,7 @@ import TanStackQueryProvider from '@/core/http/TanStackQueryProvider'
 import {BrowserRouter} from 'react-router-dom'
 import '@/assets/icons/index'
 import '@/styles/index.less'
+import 'antd-mobile/es/global'
 import App from './app'
 
 const rootElement = document.getElementById('root')
