@@ -6,8 +6,10 @@ import axios, {
 } from 'axios'
 import {ResponseType} from '@/types'
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || ''
+const BASE_URL =  ''
 type requestType = 'json' | 'form'
+
+
 
 const instance = axios.create({
     baseURL: BASE_URL,

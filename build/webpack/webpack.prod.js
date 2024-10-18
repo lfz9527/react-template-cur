@@ -53,10 +53,11 @@ const prodConfig = {
                         // 生产环境才清除 打印的日志
                         pure_funcs: [...(isProd ? ['console.log'] : [])]
                     }
-                }
+                },
+                exclude: /service-worker/, // 排除 service worker 文件
             }),
-            new CssMinimizerPlugin()
-        ],
+            new CssMinimizerPlugin(),
+        ], // 在生产环境中排除 service-worker.js
         // 对于动态导入模块，请在 SplitChunksPlugin 页面中查看配置其行为的可用选项。
         splitChunks: {
             automaticNameDelimiter: '-', // 生成名称的分隔符
@@ -64,6 +65,11 @@ const prodConfig = {
             // minSize: 100000, //  todo, 后续还有性能问题再拆, 生成 chunk 的最小体积（以 bytes 为单位）。
             // maxSize: 244000, // todo, 后续还有性能问题再拆, 生成 chunk 的最大体积（以 bytes 为单位）。
             cacheGroups: {
+                serviceWorker: {
+                    test: /service-worker\.js$/,
+                    chunks: 'all',
+                    enforce: true,
+                },
                 commons: {
                     test: /[/\\]node_modules[/\\]/, // 只筛选从node_modules文件夹下引入的模块
                     name: 'commons',
@@ -72,16 +78,9 @@ const prodConfig = {
                     maxInitialRequests: 3, //最大初始化加载次数，一个入口文件可以并行加载的最大文件数量，默认3
                     priority: -10 // 优先级, 先vendors引用包, 再找本地包,  因为default 权重小于vendors
                 }
-                // 抽离自定义工具库
-                // utilCommon: {
-                //     name: 'util-common',
-                //     minSize: 0, // 将引用模块分离成新代码文件的最小体积
-                //     minChunks: 2, // 表示将引用模块如不同文件引用了多少次，才能分离生成新chunk
-                //     priority: -20 // 优先级
-                // }
             }
         }
-    }
+    },
 }
 
 module.exports = merge(commonConfig, prodConfig)

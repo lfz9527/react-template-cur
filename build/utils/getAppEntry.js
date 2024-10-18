@@ -23,7 +23,6 @@ const getAppEntry = (path) => {
 
         entry[`${item}/${item}`] = entrySrc
     })
-    console.log('entry', entry)
     return entry
 }
 

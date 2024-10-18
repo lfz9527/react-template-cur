@@ -3,11 +3,11 @@ import {persist, createJSONStorage, devtools} from 'zustand/middleware'
 import {logger} from './loggerMiddleware'
 
 interface State {
-    appId: string
+    uuid: string
 }
 
 interface Action {
-    setAppId: (appId: State['appId']) => void
+    setUuid: (uuid: State['uuid']) => void
 }
 
 const useGlobalStore = create<State & Action>()(
@@ -15,8 +15,8 @@ const useGlobalStore = create<State & Action>()(
         devtools(
             persist(
                 (set) => ({
-                    appId: '',
-                    setAppId: (appId: State['appId']) => set({appId})
+                    uuid: '',
+                    setUuid: (uuid: State['uuid']) => set({uuid})
                 }),
                 {
                     name: 'globalState',

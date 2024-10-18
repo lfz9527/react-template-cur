@@ -8,7 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 抽离css文�
 const paths = require('../config/paths')
 const {getClientEnvironment, isDevelopment} = require('../config/env')
 const useTypeScript = fs.existsSync(paths.appTsConfig)
-const {raw} = getClientEnvironment(paths.publicUrlOrPath)
+const {raw,stringified} = getClientEnvironment(paths.publicUrlOrPath)
 const {
     REACT_APP_IMAGE_BASE_64_PATH,
     REACT_APP_SHOULD_BASE_64_FROM_FILE_END,
@@ -52,9 +52,12 @@ const cssLoaders = (importLoaders) => [
 
 const createHtml = require('../utils/createHtml.js') // html配置
 const getEntry = require('../utils/getAppEntry.js')
-const htmlArr = createHtml('./src/pages')
+const {HTMLs,copyFilePatterns} = createHtml('./src/pages',raw)
 const entry = getEntry(paths.mulAppIndexJs)
-console.log('entry==', entry)
+
+// console.log('raw',raw);
+// console.log('stringified',stringified);
+
 
 const config = {
     entry: entry,
@@ -160,20 +163,20 @@ const config = {
         ]
     },
     plugins: [
-        new Webpack.DefinePlugin(raw),
-        new HtmlWebpackPlugin({
-            template: paths.appHtml,
-            cache: true,
-            env: raw.NODE_ENV || 'development'
-        }),
+        new Webpack.DefinePlugin(stringified),
+        // 给一个默认的html 确保 / /index.html 是可以访问的
+        // new HtmlWebpackPlugin({
+        //     template: paths.appHtml,
+        //     cache: true,
+        //     env: raw.NODE_ENV || 'development'
+        // }),
         new CopyPlugin({
             patterns: [
+                ...copyFilePatterns,
                 {
-                    from: paths.appPublic,
+                    from: paths.appPublic + '/service-worker.js',
                     to: paths.appBuild,
                     globOptions: {
-                        dot: true,
-                        gitignore: false,
                         ignore: ['**/index.html']
                     }
                 }
@@ -189,7 +192,7 @@ const config = {
                     configFile: paths.appTsConfig
                 }
             }),
-        ...htmlArr
+        ...HTMLs
     ].filter(Boolean)
 }
 module.exports = config

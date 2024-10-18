@@ -1,8 +1,9 @@
 import React from 'react'
+import '@/styles/app.less'
 import {ErrorBlock, Space} from 'antd-mobile'
 const NotFound = () => {
     return (
-        <div id='app'>
+        <div className='app'>
             <Space
                 justify='center'
                 block

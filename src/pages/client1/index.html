@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,minimum-scale=1.0,viewport-fit=cover"
+        />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Cache-control" content="no-cache" />
+        <meta http-equiv="Cache" content="no-cache" />
+        <meta http-equiv="window-target" content="_top" />
+        <meta name="format-detection" content="telephone=no" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/client1/static_config/256.png"
+            sizes="256x256"
+        />
+        <link rel="manifest" href="/client1/manifest.json" />
+        <!-- 苹果的一些pwa 配置 -->
+        <!-- Touch Bar区域显示的网站图标 -->
+        <link
+            rel="mask-icon"
+            href="/client1/static_config/256.png"
+            color="#fff"
+        />
+        <!-- 状态栏颜色 default/black/black-translucent -->
+        <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="black-translucent"
+        />
+        <!-- 应用名 -->
+        <meta name="apple-mobile-web-app-title" content="MCash" />
+        <!-- 在Windows 8上，我们可以将网站固定在开始屏幕上，而且支持个性化自定义色块icon和背景图片。这个标签是用来定义色块的背景图的。色块图应该为144*144像素的png格式图片，背景透明。 -->
+        <meta name="msapplication-TileImage" content="144.png" />
+        <!-- 同前一个元数据msapplication-TileImage类似，这个功能是用来设置颜色值，个性化自定义色块（磁贴）icon -->
+        <meta name="msapplication-TileColor" content="#F3F3F3" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <!-- <link rel="apple-touch-startup-image" href="logo/256.png"> -->
+        <title>MCash</title>
+    </head>
+    <body>
+        <noscript>您需要启用JavaScript才能运行此应用。</noscript>
+        <div id="root"></div>
+
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker
+                    .getRegistrations()
+                    .then((registrations) => {
+                        console.log('registrations', registrations)
+                    })
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker
+                        .register(
+                            window.location.origin + '/service-worker.js',
+                            {
+                                scope: '/client1/'
+                            }
+                        )
+                        .then(function (reg) {
+                            console.log('Service worker registered')
+                        })
+                        .catch(function (err) {
+                            console.log(
+                                'Service worker registration failed',
+                                err
+                            )
+                        })
+                })
+            }
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault()
+                window.promptEvent = e
+            })
+        </script>
+    </body>
+</html>

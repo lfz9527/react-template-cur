@@ -1,3 +1,7 @@
 dist
 node_modules
 public
+
+# 忽略所有 service-worker 相关文件
+service-worker.js
+index.html

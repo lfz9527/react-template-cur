@@ -1,7 +1,7 @@
 // host
 const SERVER_HOST = 'localhost'
 // 端口号
-const SERVER_PORT = 8100
+const SERVER_PORT = 9009
 // 是否开启https
 const HTTPS = false
 

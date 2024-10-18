@@ -1,0 +1,25 @@
+{
+    "name": "Client1",
+    "short_name": "Client1",
+    "description": "Client1 App",
+    "start_url": "/client1?standalone=1",
+    "display": "standalone",
+    "scope":"/client1",
+    "icons": [
+        {
+            "src": "/client1/static_config/256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "/client1/static_config/192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/client1/static_config/512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}

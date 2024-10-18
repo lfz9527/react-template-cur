@@ -22,7 +22,8 @@
         "analyze": "cross-env NODE_ENV=production node build/scripts/build.js --analyze",
         "lint": "npm run lint-eslint && npm run lint-stylelint",
         "lint-eslint": "eslint -c .eslintrc.js --ext .ts,.tsx,.js src --fix",
-        "lint-stylelint": "stylelint --config .stylelintrc.js src/**/*.{less,css,scss} --fix"
+        "lint-stylelint": "stylelint --config .stylelintrc.js src/**/*.{less,css,scss} --fix",
+        "deploy": "npm run build && node build/serve.js"
     },
     "husky": {
         "hooks": {
@@ -114,8 +115,15 @@
         "webpackbar": "^6.0.1"
     },
     "dependencies": {
-        "@tanstack/react-query": "^5.59.0",
+        "@khmyznikov/pwa-install": "^0.4.8",
+        "@lit/react": "^1.0.6",
+        "@tanstack/react-query": "^5.59.15",
+        "@types/dom-chromium-installation-events": "^101.0.4",
+        "@types/web-app-manifest": "^1.0.8",
         "axios": "^1.7.7",
+        "eruda": "^3.4.0",
+        "express": "^4.21.1",
+        "lit": "^3.2.1",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "zustand": "^5.0.0-rc.2"

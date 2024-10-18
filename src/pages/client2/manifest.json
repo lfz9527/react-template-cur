@@ -1,0 +1,25 @@
+{
+    "name": "Client2",
+    "short_name": "Client2",
+    "description": "Client2",
+    "start_url": "/client2?standalone=1",
+    "display": "standalone",
+    "scope":"/client2",
+    "icons": [
+        {
+            "src": "/client2/static_config/256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "/client2/static_config/192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/client2/static_config/512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}

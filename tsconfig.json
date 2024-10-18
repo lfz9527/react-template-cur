@@ -30,8 +30,8 @@
             "@/*": ["src/*"],
             "@types/*": ["src/types/*"]
         },
-        "typeRoots": ["node_modules/@types"],
-        "types": ["webpack", "webpack-env","node"],
+        "typeRoots": ["node_modules/@types","./src/types"],
+        "types": ["webpack", "webpack-env","node","dom-chromium-installation-events", "web-app-manifest"],
         /* 额外的检查 */
         "noUnusedLocals": true, // 有未使用的变量时，抛出错误
         "noUnusedParameters": true, // 有未使用的参数时，抛出错误
