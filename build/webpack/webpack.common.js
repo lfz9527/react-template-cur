@@ -1,6 +1,7 @@
 const fs = require('fs')
 const Webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin') // 简化 HTML 文件创建以服务捆绑包的插件, 将js文件自动引进 html 文件中
+// const HtmlWebpackPlugin = require('html-webpack-plugin') // 简化 HTML 文件创建以服务捆绑包的插件, 将js文件自动引进 html 文件中
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin') // 将已存在的单个文件或整个目录复制到生成目录
 const WebpackBar = require('webpackbar') // 优雅的 Webpack 进度条和分析器
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin') // 启动本地服务/打包错误提示
@@ -8,7 +9,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 抽离css文�
 const paths = require('../config/paths')
 const {getClientEnvironment, isDevelopment} = require('../config/env')
 const useTypeScript = fs.existsSync(paths.appTsConfig)
-const {raw,stringified} = getClientEnvironment(paths.publicUrlOrPath)
+const {raw, stringified} = getClientEnvironment(paths.publicUrlOrPath)
 const {
     REACT_APP_IMAGE_BASE_64_PATH,
     REACT_APP_SHOULD_BASE_64_FROM_FILE_END,
@@ -52,12 +53,11 @@ const cssLoaders = (importLoaders) => [
 
 const createHtml = require('../utils/createHtml.js') // html配置
 const getEntry = require('../utils/getAppEntry.js')
-const {HTMLs,copyFilePatterns} = createHtml('./src/pages',raw)
+const {HTMLs, copyFilePatterns} = createHtml('./src/pages', raw)
 const entry = getEntry(paths.mulAppIndexJs)
 
 // console.log('raw',raw);
 // console.log('stringified',stringified);
-
 
 const config = {
     entry: entry,
@@ -172,14 +172,14 @@ const config = {
         // }),
         new CopyPlugin({
             patterns: [
-                ...copyFilePatterns,
-                {
-                    from: paths.appPublic + '/service-worker.js',
-                    to: paths.appBuild,
-                    globOptions: {
-                        ignore: ['**/index.html']
-                    }
-                }
+                ...copyFilePatterns
+                // {
+                //     from: paths.appPublic + '/service-worker.js',
+                //     to: paths.appBuild,
+                //     globOptions: {
+                //         ignore: ['**/index.html']
+                //     }
+                // }
             ]
         }),
         new WebpackBar({
@@ -191,6 +191,15 @@ const config = {
                 typescript: {
                     configFile: paths.appTsConfig
                 }
+            }),
+        fs.existsSync(paths.swSrc) &&
+            new WorkboxWebpackPlugin.InjectManifest({
+                swSrc: paths.swSrc,
+                dontCacheBustURLsMatching: /\.[0-9a-f]{8}\./,
+                exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE/],
+                swDest: 'service-worker.js',
+                // 设置预缓存文件的最大大小限制。默认情况下，Workbox 会限制预缓存文件的大小为 2MB，
+                maximumFileSizeToCacheInBytes: 5 * 1024 * 1024
             }),
         ...HTMLs
     ].filter(Boolean)

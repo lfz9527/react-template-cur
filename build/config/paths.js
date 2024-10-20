@@ -67,6 +67,8 @@ module.exports = {
     appSvg: resolveApp('src/assets/icons'),
     // yarn.lock 文件目录
     yarnLockFile: resolveApp('yarn.lock'),
+    // swc 文件目录
+    swSrc: resolveModule(resolveApp, 'src/service-worker'),
     // 支持的模块文件扩展名数组
     moduleFileExtensions,
     resolveModule
